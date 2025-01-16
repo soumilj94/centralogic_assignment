@@ -1,16 +1,16 @@
 import 'package:centralogic_assignment/features/blocs/register_page/register_bloc.dart';
 import 'package:centralogic_assignment/features/blocs/register_page/register_event.dart';
 import 'package:centralogic_assignment/features/blocs/register_page/register_state.dart';
-import 'package:centralogic_assignment/features/pages/home_page.dart';
 import 'package:centralogic_assignment/features/pages/login_page.dart';
 import 'package:centralogic_assignment/features/widgets/book_interent_select.dart';
+import 'package:centralogic_assignment/features/widgets/custom_texts.dart';
 import 'package:centralogic_assignment/features/widgets/gender_select.dart';
 import 'package:centralogic_assignment/features/widgets/input_field_label.dart';
+import 'package:centralogic_assignment/features/widgets/register_login_text_identifier.dart';
 import 'package:centralogic_assignment/features/widgets/rounded_button.dart';
 import 'package:centralogic_assignment/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -52,7 +52,7 @@ class RegisterPage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Register", style: GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.w700)),
+                          RegisterTitleText(text: "Register"),
                           Text("Create account", style: TextStyle(color: AppColors.greyOne, fontSize: 16)),
                         ],
                       ),
@@ -191,20 +191,7 @@ class RegisterPage extends StatelessWidget {
 
                           SizedBox(height: 15),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Have an account?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.greyOne)),
-                              TextButton(
-                                onPressed: (){
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => LoginPage()) 
-                                  );
-                                }, 
-                                child: Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary)))
-                            ],
-                          ),
+                          IdentifierPage(title: "Have an account?", action: "Login", nextPage: LoginPage()),
 
                           SizedBox(height: 15),
 

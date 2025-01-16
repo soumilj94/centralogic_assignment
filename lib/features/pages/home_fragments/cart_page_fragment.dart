@@ -1,6 +1,7 @@
 import 'package:centralogic_assignment/features/blocs/cart_page/cart_bloc.dart';
 import 'package:centralogic_assignment/features/blocs/cart_page/cart_event.dart';
 import 'package:centralogic_assignment/features/blocs/cart_page/cart_state.dart';
+import 'package:centralogic_assignment/features/widgets/custom_cart_texts.dart';
 import 'package:centralogic_assignment/features/widgets/rounded_button.dart';
 import 'package:centralogic_assignment/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -145,8 +146,8 @@ class CartPageFragment extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Subtotal", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text("\$${state.items.fold(0, (total, item) => total + item.price.toInt())}", style: TextStyle(fontWeight: FontWeight.bold)),
+                      CartText(text: "Subtotal"),
+                      CartText(text: "\$${state.items.fold(0, (total, item) => total + item.price.toInt())}"),
                     ],
                   ),
                 ),
@@ -159,8 +160,8 @@ class CartPageFragment extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Shipping", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text("\$2", style: TextStyle(fontWeight: FontWeight.bold)),
+                      CartText(text: "Shipping"),
+                      CartText(text: "\$2"),
                     ],
                   ),
                 ),
@@ -173,8 +174,8 @@ class CartPageFragment extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Total Payment", style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text("\$${state.items.fold(0, (total, item) => total + item.price.toInt() + 2)}", style: TextStyle(fontWeight: FontWeight.bold)),
+                      CartText(text: "Total Payment"),
+                      CartText(text: "\$${state.items.fold(0, (total, item) => total + item.price.toInt() + 2)}")
                     ],
                   ),
                 ),

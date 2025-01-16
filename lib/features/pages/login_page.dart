@@ -3,14 +3,15 @@ import 'package:centralogic_assignment/features/blocs/login_page/login_event.dar
 import 'package:centralogic_assignment/features/blocs/login_page/login_state.dart';
 import 'package:centralogic_assignment/features/pages/home_page.dart';
 import 'package:centralogic_assignment/features/pages/register_page.dart';
+import 'package:centralogic_assignment/features/widgets/custom_divider.dart';
 import 'package:centralogic_assignment/features/widgets/custom_signin_button.dart';
+import 'package:centralogic_assignment/features/widgets/custom_texts.dart';
 import 'package:centralogic_assignment/features/widgets/input_field_label.dart';
+import 'package:centralogic_assignment/features/widgets/register_login_text_identifier.dart';
 import 'package:centralogic_assignment/features/widgets/rounded_button.dart';
 import 'package:centralogic_assignment/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,22 +20,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    debugSharedPreferences();
-  }
-
-  void debugSharedPreferences() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("Name: ${prefs.getString('name')}");
-    print("Email: ${prefs.getString('email')}");
-    print("Password: ${prefs.getString('password')}");
-    print("Age Group: ${prefs.getString('ageGroup')}");
-    print("Gender: ${prefs.getString('gender')}");
-    print("Interests: ${prefs.getStringList('interests')}");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Welcome Back 👋", style: GoogleFonts.openSans(fontSize: 24, fontWeight: FontWeight.w700)),
+                            RegisterTitleText(text: "Welcome Back 👋"),
                             Text("Sign to your account", style: TextStyle(color: AppColors.greyOne, fontSize: 16)),
                           ],
                         ),
@@ -147,32 +132,9 @@ class _LoginPageState extends State<LoginPage> {
                             text: "Login",
                           ),
 
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Don't have an account?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.greyOne)),
-                                TextButton(
-                                  onPressed: (){
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => RegisterPage())
-                                    );
-                                  },
-                                  child: Text("Register", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary)))
-                              ],
-                          ),
-
+                          IdentifierPage(title: "Don't have an account?", action: "Register", nextPage: RegisterPage()),
                           // divider
-                          Row(
-                            children: [
-                              Expanded(child: Divider(color: AppColors.greyOne)),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text("Or with", style: TextStyle(color: AppColors.greyOne),),
-                              ),
-                              Expanded(child: Divider(color: AppColors.greyOne)),
-                            ],
-                          ),
+                          CustomDivider(),
 
                           SizedBox(height: 15),
                           // sign in with buttons

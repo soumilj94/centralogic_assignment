@@ -1,9 +1,9 @@
 import 'package:centralogic_assignment/features/pages/home_page.dart';
 import 'package:centralogic_assignment/features/widgets/welcome_button.dart';
+import 'package:centralogic_assignment/features/widgets/custom_texts.dart';
 import 'package:centralogic_assignment/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -30,13 +30,13 @@ class WelcomePage extends StatelessWidget {
                   }, 
                   child: Text(
                     "Skip", 
-                    style: GoogleFonts.roboto(textStyle: TextStyle(color: AppColors.primary), fontWeight: FontWeight.w500),
+                    style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w500),
                   )
                 ),
               ],),
               SvgPicture.asset(welcomeImage),
-              Text("Your Bookish", style: GoogleFonts.openSans(fontWeight: FontWeight.w700, fontSize: 28),),
-              Text("Soulmate Awaits", style: GoogleFonts.openSans(fontWeight: FontWeight.w700, fontSize: 28),),
+              WelcomeHeadlineText(text: "Your Bookish"),
+              WelcomeHeadlineText(text: "Soulmate Awaits"),
               Text("Let us be your guide to the perfect read. Discover books tailored to your tastes \nfor a truly rewarding experience.", textAlign: TextAlign.center),
 
               Expanded(child: Container()),
