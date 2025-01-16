@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Dark Matter",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra dignissim ac ac ac. Nibh et sed ac, eget malesuada.",
+        "price": 16.99,
+        "rating" : 4,
+        "availability": "In Stock",
+        "vendor_image": "assets/vendor_covers/one.svg",
+        "image": "assets/book_covers/dark-matter.jpg"
+    },
+    {
+        "id": 2,
+        "name": "The Kite Runner",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra dignissim ac ac ac. Nibh et sed ac, eget malesuada.",
+        "price": 14.99,
+        "rating" : 3,
+        "availability": "In Stock",
+        "vendor_image": "assets/vendor_covers/two.svg",
+        "image": "assets/book_covers/the-kite-runner.jpg"
+    },
+    {
+        "id": 3,
+        "name": "The Subtle Art of Not Giving a Fuck",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra dignissim ac ac ac. Nibh et sed ac, eget malesuada.",
+        "price": 10.99,
+        "rating" : 5,
+        "availability": "In Stock",
+        "vendor_image": "assets/vendor_covers/three.svg",
+        "image": "assets/book_covers/the-subtle-art.jpg"
+    }
+]
