@@ -6,6 +6,8 @@ class LoginState {
   final bool isEmailError;
   final bool isPasswordError;
   final bool isSubmitting;
+  final bool isAuthenticated;
+  final String? loginError;
 
   LoginState({
     this.email = '',
@@ -15,6 +17,8 @@ class LoginState {
     this.isEmailError = false,
     this.isPasswordError = false,
     this.isSubmitting = false,
+    this.isAuthenticated = false,
+    this.loginError,
   });
 
   LoginState copyWith({
@@ -25,6 +29,8 @@ class LoginState {
     bool? isEmailError,
     bool? isPasswordError,
     bool? isSubmitting,
+    bool? isAuthenticated,
+    String? loginError,
   }){
     return LoginState(
       email: email ?? this.email,
@@ -34,6 +40,8 @@ class LoginState {
       isEmailError: isEmailError ?? this.isEmailError,
       isPasswordError: isPasswordError ?? this.isPasswordError,
       isSubmitting: isSubmitting ?? this.isSubmitting,
+      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
+      loginError: loginError ?? this.loginError,
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:centralogic_assignment/features/blocs/book_details_sheet/book_quantity_bloc.dart';
-import 'package:centralogic_assignment/features/blocs/book_details_sheet/book_quantity_event.dart';
+import 'package:centralogic_assignment/features/blocs/book_details_sheet/book_quantity_event.dart' as book_quantity_event;
 import 'package:centralogic_assignment/features/blocs/book_details_sheet/book_quantity_state.dart';
+import 'package:centralogic_assignment/features/blocs/cart_page/cart_bloc.dart';
+import 'package:centralogic_assignment/features/blocs/cart_page/cart_event.dart' as cart_event;
+import 'package:centralogic_assignment/features/pages/home_fragments/cart_page_fragment.dart';
 import 'package:centralogic_assignment/features/widgets/custom_outline_button.dart';
 import 'package:centralogic_assignment/features/widgets/rounded_button.dart';
 import 'package:centralogic_assignment/themes/colors.dart';
@@ -114,14 +117,14 @@ class BookDetailsSheet extends StatelessWidget {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  context.read<BookQuantityBloc>().add(DecrementQuantity());
+                                  context.read<BookQuantityBloc>().add(book_quantity_event.DecrementQuantity());
                                 },
                                 icon: Icon(Icons.remove_circle_rounded, size: 40, color: AppColors.greyOne,),
                               ),
                               Text("${state.quantity}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
                               IconButton(
                                 onPressed: () {
-                                  context.read<BookQuantityBloc>().add(IncrementQuantity());
+                                  context.read<BookQuantityBloc>().add(book_quantity_event.IncrementQuantity());
                                 },
                                 icon: Icon(Icons.add_circle_rounded, size: 40, color: AppColors.primary,),
                               ),
@@ -151,7 +154,21 @@ class BookDetailsSheet extends StatelessWidget {
                         bgColor: AppColors.primary,
                         textColor: AppColors.white,
                         text: "Add to Bag",
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CartBloc>(context).add(
+                            cart_event.AddToCart(
+                              name: name,
+                              image: image,
+                              price: price,
+                            ),
+                          );
+                          print(context.read<CartBloc>());
+                          print("AddToCart event dispatched!");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartPageFragment()),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(width: 10),

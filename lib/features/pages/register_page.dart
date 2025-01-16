@@ -1,6 +1,7 @@
 import 'package:centralogic_assignment/features/blocs/register_page/register_bloc.dart';
 import 'package:centralogic_assignment/features/blocs/register_page/register_event.dart';
 import 'package:centralogic_assignment/features/blocs/register_page/register_state.dart';
+import 'package:centralogic_assignment/features/pages/home_page.dart';
 import 'package:centralogic_assignment/features/pages/login_page.dart';
 import 'package:centralogic_assignment/features/widgets/book_interent_select.dart';
 import 'package:centralogic_assignment/features/widgets/gender_select.dart';
@@ -14,6 +15,8 @@ import 'package:google_fonts/google_fonts.dart';
 class RegisterPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
+  RegisterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -21,7 +24,20 @@ class RegisterPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(backgroundColor: AppColors.white,),
-        body: Padding(
+        body: BlocListener<RegisterBloc, RegisterState>(
+          listener: (context, state) {
+            if(state.isSuccess){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Registered Successfully!"), duration: const Duration(seconds: 1))
+              );
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  (route) => false
+              );
+            }
+          },
+          child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: BlocBuilder<RegisterBloc, RegisterState>(
             builder: (context, state){
@@ -130,8 +146,41 @@ class RegisterPage extends StatelessWidget {
                               if(_formKey.currentState!.validate()){
                                 context.read<RegisterBloc>().add(ValidateFields());
                                 final state = context.read<RegisterBloc>().state;
-                                if(!state.isNameError && !state.isEmailError && !state.isPasswordError){
-                                  context.read<RegisterBloc>().add(SubmitRegistration());
+
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<RegisterBloc>().add(ValidateFields());
+                                  final state = context.read<RegisterBloc>().state;
+
+                                  if (state.nameError == null &&
+                                      state.emailError == null &&
+                                      state.passwordError == null &&
+                                      state.ageGroupError == null &&
+                                      state.genderError == null &&
+                                      state.interestsError == null)
+                                  {
+                                    context.read<RegisterBloc>().add(SubmitRegistration());
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text("Error!"),
+                                        content: Text([
+                                          if (state.nameError != null) state.nameError!,
+                                          if (state.emailError != null) state.emailError!,
+                                          if (state.passwordError != null) state.passwordError!,
+                                          if (state.ageGroupError != null) state.ageGroupError!,
+                                          if (state.genderError != null) state.genderError!,
+                                          if (state.interestsError != null) state.interestsError!,
+                                        ].join("\n")),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(context),
+                                            child: Text("Ok"),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }
                                 }
                               }
                             },
@@ -181,6 +230,7 @@ class RegisterPage extends StatelessWidget {
             },
           ),
         ),
+),
       ),
     );
   }

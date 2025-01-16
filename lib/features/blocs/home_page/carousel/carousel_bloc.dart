@@ -15,11 +15,10 @@ class CarouselBloc extends Bloc<CarouselEvent, CarouselState> {
     emit(state.copyWith(isLoading: true, hasError: false));
 
     try {
-      // Load the JSON file
       final String response = await rootBundle.loadString('assets/books.json');
       final List<dynamic> data = jsonDecode(response);
 
-      // Convert JSON data to a list of CarouselItem
+      // convert json to a list
       final items = data.map((item) => CarouselItem(
         id: item['id'],
         name: item['name'],

@@ -1,3 +1,4 @@
+import 'package:centralogic_assignment/features/blocs/cart_page/cart_bloc.dart';
 import 'package:centralogic_assignment/features/blocs/home_page/carousel/carousel_bloc.dart';
 import 'package:centralogic_assignment/features/blocs/home_page/carousel/carousel_event.dart';
 import 'package:centralogic_assignment/features/blocs/home_page/carousel/carousel_state.dart';
@@ -16,8 +17,11 @@ class HomePageFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CarouselBloc()..add(FetchCarouselItems()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => CarouselBloc()..add(FetchCarouselItems()),),
+        BlocProvider(create: (_) => CartBloc(),),
+      ],
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -182,6 +186,6 @@ class HomePageFragment extends StatelessWidget {
           ),
         ),
       ),
-    );
+);
   }
 }
