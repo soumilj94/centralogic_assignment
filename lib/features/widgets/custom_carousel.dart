@@ -10,6 +10,9 @@ class CustomCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PageController _pageController = PageController();
+    final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
+    
     return CarouselSlider(
       options: CarouselOptions(
         height: 150,
